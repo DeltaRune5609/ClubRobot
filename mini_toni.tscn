@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhoamf1nacg38"]
+
+[ext_resource type="Script" path="res://Enemies/moni_toni/moni_toni.gd" id="1_lenpg"]
+[ext_resource type="Texture2D" uid="uid://cvebjk4kybph2" path="res://Enemies/moni_toni/moni-tony.webp" id="1_pes2o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7qpq"]
+size = Vector2(58.5841, 66.7941)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qt5xh"]
+size = Vector2(51.9405, 13.3493)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_asp15"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pes2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_pes2o")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+scale = Vector2(1.65574, 1.61691)
+script = ExtResource("1_lenpg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(1.5099, 4.32924)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_h7qpq")
+
+[node name="PlayerDetector" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(3.8147e-06, 0.618465)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PlayerDetector"]
+position = Vector2(1.20792, -31.5416)
+shape = SubResource("RectangleShape2D_qt5xh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(2.38419e-07, 0)
+sprite_frames = SubResource("SpriteFrames_asp15")
+animation = &"new_animation"
+frame_progress = 0.975127
+
+[node name="RayCastRight" type="RayCast2D" parent="CharacterBody2D"]
+target_position = Vector2(46.505, -0.618464)
+
+[node name="RayCastLeft" type="RayCast2D" parent="CharacterBody2D"]
+target_position = Vector2(-47.1089, 0)
+
+[connection signal="body_entered" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_exited"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck1pg4hsrhdwk"]
+
+[ext_resource type="Script" path="res://Scripts/door.gd" id="1_6w652"]
+[ext_resource type="PackedScene" uid="uid://0yn61jovxn44" path="res://title/title_screen.tscn" id="2_eg8ha"]
+[ext_resource type="Texture2D" uid="uid://wtegllv7hsdy" path="res://icon.svg" id="2_mdr1n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v8xj"]
+size = Vector2(83, 165)
+
+[node name="Area2D" type="Area2D"]
+priority = 2
+script = ExtResource("1_6w652")
+target_scene = ExtResource("2_eg8ha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 7
+shape = SubResource("RectangleShape2D_7v8xj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mdr1n")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://mxrm86oynxvs"]
+
+[ext_resource type="Script" path="res://orb.gd" id="1_i4ulh"]
+[ext_resource type="Texture2D" uid="uid://wtegllv7hsdy" path="res://icon.svg" id="1_joede"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8f7w"]
+size = Vector2(84, 80)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_i4ulh")
+initial_force = 1000.0
+homing_delay = 0.0
+bounce_factor = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, -30)
+shape = SubResource("RectangleShape2D_k8f7w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(33, -29.75)
+scale = Vector2(0.671875, 0.628906)
+texture = ExtResource("1_joede")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

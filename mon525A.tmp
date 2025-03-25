@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://esn4wvjl24cd"]
+
+[ext_resource type="Script" path="res://mini_toni.gd" id="1_e8x8i"]
+[ext_resource type="Texture2D" uid="uid://dpwjv516qq3ch" path="res://moni-tony.png" id="2_q0va0"]
+[ext_resource type="Texture2D" uid="uid://n76aoh8tefi" path="res://moni-tony2 (1).png" id="4_3grvb"]
+[ext_resource type="AudioStream" uid="uid://diouqipgbqo6n" path="res://Untitled.mp3" id="4_i33iu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7qpq"]
+size = Vector2(22.3465, 37.1079)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qt5xh"]
+size = Vector2(30.8019, 29.5578)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ycoc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3grvb")
+}],
+"loop": false,
+"name": &"death",
+"speed": 40.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q0va0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+scale = Vector2(1.65574, 1.61691)
+script = ExtResource("1_e8x8i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-1.5099, 3.09232)
+scale = Vector2(0.999998, 0.999998)
+shape = SubResource("RectangleShape2D_h7qpq")
+
+[node name="PlayerDetector" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(3.8147e-06, 0.618465)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PlayerDetector"]
+position = Vector2(-0.905943, -13.542)
+shape = SubResource("RectangleShape2D_qt5xh")
+
+[node name="RayCastRight" type="RayCast2D" parent="CharacterBody2D"]
+target_position = Vector2(46.505, -0.618464)
+
+[node name="RayCastLeft" type="RayCast2D" parent="CharacterBody2D"]
+target_position = Vector2(-47.1089, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.60396, 0.618464)
+sprite_frames = SubResource("SpriteFrames_4ycoc")
+animation = &"death"
+frame_progress = 1.0
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("4_i33iu")
+
+[connection signal="body_entered" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_exited"]

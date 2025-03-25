@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://bi1peebe6bdd7"]
+
+[ext_resource type="Script" path="res://Enemies/moni_toni/area_2d.gd" id="1_3egql"]
+[ext_resource type="Texture2D" uid="uid://b07he7cc7j73m" path="res://items/costume5 (1).png" id="2_wv2uk"]
+[ext_resource type="Texture2D" uid="uid://dwji84byympcr" path="res://items/costume5.png" id="2_ycks4"]
+[ext_resource type="AudioStream" uid="uid://diouqipgbqo6n" path="res://Untitled.mp3" id="4_r88nh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmfpd"]
+size = Vector2(94, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crvv7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wv2uk")
+}],
+"loop": false,
+"name": &"bounce",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ycks4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_3egql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_wmfpd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_crvv7")
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource("4_r88nh")
+volume_db = 5.0
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

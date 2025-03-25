@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://5fd2rhnngt8i"]
+
+[ext_resource type="Script" path="res://laser.gd" id="1_m1lrl"]
+[ext_resource type="Texture2D" uid="uid://dotukb64j5prj" path="res://robotanimations/coby4 (1).png" id="2_1gagh"]
+[ext_resource type="AudioStream" uid="uid://duwmhp3jt3pod" path="res://music/SFX/Battle Star2.wav" id="3_rcx8t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3cr8p"]
+radius = 28.8617
+
+[node name="Laser" type="Area2D"]
+script = ExtResource("1_m1lrl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3cr8p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_1gagh")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rcx8t")
