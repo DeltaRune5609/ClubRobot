@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckdo28oxl3wdf"]
+
+[ext_resource type="Script" path="res://Levels/kdoor1.gd" id="1_msi0s"]
+[ext_resource type="Texture2D" uid="uid://b6ojrsgam3m1l" path="res://costume1 (4).png" id="2_mu4f1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm4f0"]
+size = Vector2(20, 92.6118)
+
+[node name="Kdoor" type="Node2D"]
+rotation = -1.56896
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_msi0s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-1, -1)
+scale = Vector2(1.80769, 2.65625)
+shape = SubResource("RectangleShape2D_cm4f0")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-9.53674e-07, 1.49999)
+scale = Vector2(1.46154, 2.57292)
+texture = ExtResource("2_mu4f1")

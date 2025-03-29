@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ci42guikfvlbi"
+path="res://.godot/imported/Robot on the Run.mp3-621c1c36ecd1d90d7c36ae55bc832073.mp3str"
+
+[deps]
+
+source_file="res://music/Robot on the Run.mp3"
+dest_files=["res://.godot/imported/Robot on the Run.mp3-621c1c36ecd1d90d7c36ae55bc832073.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

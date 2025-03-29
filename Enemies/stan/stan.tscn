@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3 uid="uid://dmc72dorhrc4k"]
+
+[ext_resource type="Script" path="res://Enemies/stan/stan.gd" id="1_v1bk3"]
+[ext_resource type="Script" path="res://Enemies/stan/area_2d2.gd" id="2_0vncw"]
+[ext_resource type="Texture2D" uid="uid://c503ujx67vxvi" path="res://Enemies/stan/stingin_stan_1.png" id="3_fnru8"]
+[ext_resource type="AudioStream" uid="uid://duwmhp3jt3pod" path="res://music/SFX/Battle Star2.wav" id="4_8nmxo"]
+[ext_resource type="Script" path="res://hazardpart.gd" id="5_4sx3o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7qpq"]
+size = Vector2(67.0396, 28.4494)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qt5xh"]
+size = Vector2(70.6633, 32.0317)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ycoc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fnru8")
+}],
+"loop": false,
+"name": &"death",
+"speed": 40.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fnru8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6iak"]
+size = Vector2(70.0595, 32.7786)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ab5dg"]
+size = Vector2(141.792, 29.3215)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+scale = Vector2(1.65574, 1.61691)
+script = ExtResource("1_v1bk3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-1.20792, -1.23693)
+scale = Vector2(0.999998, 0.999998)
+shape = SubResource("RectangleShape2D_h7qpq")
+
+[node name="PlayerDetector" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(3.8147e-06, 0.618465)
+script = ExtResource("2_0vncw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PlayerDetector"]
+position = Vector2(-1.20792, -12.3051)
+shape = SubResource("RectangleShape2D_qt5xh")
+
+[node name="RayCastRight" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(-1.13687e-13, 3.55271e-15)
+target_position = Vector2(42.2772, -3.55271e-15)
+
+[node name="RayCastLeft" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(1.90735e-06, 0)
+target_position = Vector2(-41.0692, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(0.516057, 0)
+scale = Vector2(0.539216, 0.618464)
+sprite_frames = SubResource("SpriteFrames_4ycoc")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(1.19209e-07, -15.4616)
+script = ExtResource("2_0vncw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(-0.905941, 3.40158)
+scale = Vector2(0.999997, 0.999997)
+shape = SubResource("RectangleShape2D_t6iak")
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+position = Vector2(1.19209e-07, -15.4616)
+stream = ExtResource("4_8nmxo")
+volume_db = 5.0
+
+[node name="Area2D2" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(-0.60396, 8.04003)
+scale = Vector2(0.600586, 0.936563)
+script = ExtResource("5_4sx3o")
+
+[node name="HazardPart" type="CollisionShape2D" parent="CharacterBody2D/Area2D2"]
+position = Vector2(-0.502809, -0.527447)
+scale = Vector2(0.999998, 0.999998)
+shape = SubResource("RectangleShape2D_ab5dg")
+
+[connection signal="body_entered" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_exited"]
+[connection signal="body_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D/Area2D" method="_on_body_entered"]

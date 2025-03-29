@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvg448w412rbp"]
+
+[ext_resource type="Script" path="res://savezone.gd" id="1_yx88h"]
+[ext_resource type="Texture2D" uid="uid://b2qrs7tvx6dej" path="res://domeo2.png" id="2_i3fig"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1rncb"]
+size = Vector2(133, 236.5)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_yx88h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(1, 28.75)
+shape = SubResource("RectangleShape2D_1rncb")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("2_i3fig")

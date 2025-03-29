@@ -1,0 +1,126 @@
+[gd_scene load_steps=17 format=3 uid="uid://c1pl273b8215s"]
+
+[ext_resource type="Script" path="res://Bosses/Laze/bossLASER.gd" id="1_5443s"]
+[ext_resource type="Script" path="res://Bosses/Laze/area_2d2.gd" id="2_wlag2"]
+[ext_resource type="Texture2D" uid="uid://s8tt20v7lq22" path="res://Bosses/Laze/laze-ulizer2.png" id="3_8pgtq"]
+[ext_resource type="Texture2D" uid="uid://bhf3r0y15xn2l" path="res://Bosses/Laze/laze-ulizer.png" id="4_r2r24"]
+[ext_resource type="Texture2D" uid="uid://dnbdfvesunyjy" path="res://Bosses/teleport/tp1.png" id="5_rvaqs"]
+[ext_resource type="AudioStream" uid="uid://duwmhp3jt3pod" path="res://music/SFX/Battle Star2.wav" id="5_uqvoc"]
+[ext_resource type="Script" path="res://hazardpart.gd" id="6_5dlkc"]
+[ext_resource type="Texture2D" uid="uid://dxdpentpc8cqe" path="res://Bosses/teleport/tp2.png" id="6_6h82s"]
+[ext_resource type="Texture2D" uid="uid://dmxfl5wd3gd7k" path="res://Bosses/teleport/tp3.png" id="7_67eeo"]
+[ext_resource type="AudioStream" uid="uid://00ypstycp0" path="res://music/SFX/Lazergun2.wav" id="7_vlmx6"]
+[ext_resource type="Texture2D" uid="uid://c4otp08ncllfi" path="res://Bosses/teleport/tp4.png" id="8_qd4wr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7qpq"]
+size = Vector2(110.525, 80.4005)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qt5xh"]
+size = Vector2(125.02, 56.8987)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ycoc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8pgtq")
+}],
+"loop": false,
+"name": &"death",
+"speed": 40.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_r2r24")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_rvaqs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6h82s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_67eeo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qd4wr")
+}],
+"loop": true,
+"name": &"teleport",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6iak"]
+size = Vector2(129.55, 77.3082)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ab5dg"]
+size = Vector2(249.425, 86.6717)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+scale = Vector2(1.65574, 1.61691)
+script = ExtResource("1_5443s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(3.92574, 1.85538)
+scale = Vector2(0.999997, 0.999997)
+shape = SubResource("RectangleShape2D_h7qpq")
+
+[node name="PlayerDetector" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(3.8147e-06, 0.618465)
+script = ExtResource("2_wlag2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PlayerDetector"]
+position = Vector2(4.52969, -32.1601)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_qt5xh")
+
+[node name="RayCastRight" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(-1.13687e-13, 3.55271e-15)
+target_position = Vector2(25.3663, -3.55271e-15)
+
+[node name="RayCastLeft" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(1.90735e-06, 0)
+target_position = Vector2(-25.3663, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(0.603959, -3.71078)
+scale = Vector2(0.767326, 0.757085)
+sprite_frames = SubResource("SpriteFrames_4ycoc")
+animation = &"teleport"
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(1.19209e-07, -15.4616)
+script = ExtResource("2_wlag2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(4.37871, -22.5739)
+scale = Vector2(0.999996, 0.999996)
+shape = SubResource("RectangleShape2D_t6iak")
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+position = Vector2(1.19209e-07, -15.4616)
+stream = ExtResource("5_uqvoc")
+volume_db = 5.0
+
+[node name="Area2D2" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(-0.60396, 8.04003)
+scale = Vector2(0.600586, 0.936563)
+script = ExtResource("6_5dlkc")
+
+[node name="HazardPart" type="CollisionShape2D" parent="CharacterBody2D/Area2D2"]
+position = Vector2(9.06624, -2.39379)
+scale = Vector2(0.999998, 0.999999)
+shape = SubResource("RectangleShape2D_ab5dg")
+
+[node name="LaserSound" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("7_vlmx6")
+
+[connection signal="body_entered" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_exited"]
+[connection signal="body_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D/Area2D" method="_on_body_entered"]

@@ -13,6 +13,7 @@ var target: Node2D  # Will reference the player
 var can_home: bool = false
 var x = -0.5
 var frame = 0
+<<<<<<< HEAD
 
 func _ready():
 	# Set a random direction when spawned
@@ -22,17 +23,34 @@ func _ready():
 	velocity = direction * initial_force
 	
 	# Enable homing after delay
+	$Timer.wait_time = 2
+	$Timer.start()
+	body_entered.connect(_on_body_entered)
+
+=======
+func _ready():
+	# Initial burst in random direction
+	velocity.x *= randf_range(-1, 1)
+	velocity = direction * initial_force
+	
+	# Enable homing after delay
 	$Timer.wait_time = homing_delay
 	$Timer.start()
 	body_entered.connect(_on_body_entered)
 
+# In HealingOrb.gd
+>>>>>>> 890cd3cde60dde59e0e0c8076f11dca884135f8a
 func _physics_process(delta: float):
 	if frame < 10:
 		velocity.y += gravity * delta
 		position += velocity * delta
 		rotation = velocity.angle()
 		frame += 1
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 890cd3cde60dde59e0e0c8076f11dca884135f8a
 func _on_timer_timeout():
 	can_home = true
 

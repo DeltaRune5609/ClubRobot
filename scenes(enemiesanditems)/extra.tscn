@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://8gm0eb16chys"]
+
+[node name="Node2D" type="Node2D"]
+light_mask = 2
+visibility_layer = 2

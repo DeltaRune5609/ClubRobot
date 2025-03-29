@@ -1,0 +1,124 @@
+[gd_scene load_steps=16 format=3 uid="uid://bdt861v7v30e2"]
+
+[ext_resource type="Script" path="res://Bosses/Locust/bossGLIDE.gd" id="1_wsie1"]
+[ext_resource type="Script" path="res://Bosses/Locust/area_2d2.gd" id="2_bv4dg"]
+[ext_resource type="Texture2D" uid="uid://cu5jueycb8j1i" path="res://Bosses/Locust/locust.png" id="3_as28b"]
+[ext_resource type="Texture2D" uid="uid://c4a726kaguct6" path="res://Bosses/Locust/locust2.png" id="4_441pn"]
+[ext_resource type="AudioStream" uid="uid://duwmhp3jt3pod" path="res://music/SFX/Battle Star2.wav" id="5_aw7an"]
+[ext_resource type="Texture2D" uid="uid://dnbdfvesunyjy" path="res://Bosses/teleport/tp1.png" id="5_fn0g2"]
+[ext_resource type="Texture2D" uid="uid://dxdpentpc8cqe" path="res://Bosses/teleport/tp2.png" id="6_273v1"]
+[ext_resource type="Script" path="res://hazardpart.gd" id="6_upbuf"]
+[ext_resource type="Texture2D" uid="uid://dmxfl5wd3gd7k" path="res://Bosses/teleport/tp3.png" id="7_lyh0m"]
+[ext_resource type="Texture2D" uid="uid://c4otp08ncllfi" path="res://Bosses/teleport/tp4.png" id="8_mk8ws"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7qpq"]
+size = Vector2(76.0991, 34.0156)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qt5xh"]
+size = Vector2(79.1188, 20.4093)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ycoc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_as28b")
+}],
+"loop": false,
+"name": &"death",
+"speed": 40.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_441pn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_as28b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_fn0g2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_273v1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lyh0m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mk8ws")
+}],
+"loop": true,
+"name": &"teleport",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6iak"]
+size = Vector2(85.7626, 31.5417)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ab5dg"]
+size = Vector2(144.809, 40.2817)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+scale = Vector2(1.65574, 1.61691)
+script = ExtResource("1_wsie1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0.603962, -2.16462)
+scale = Vector2(0.999997, 0.999997)
+shape = SubResource("RectangleShape2D_h7qpq")
+
+[node name="PlayerDetector" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(3.8147e-06, 0.618465)
+script = ExtResource("2_bv4dg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PlayerDetector"]
+position = Vector2(-0.301979, -13.9154)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_qt5xh")
+
+[node name="RayCastRight" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(-1.13687e-13, 3.55271e-15)
+target_position = Vector2(55.5643, -3.55271e-15)
+
+[node name="RayCastLeft" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(1.90735e-06, 0)
+target_position = Vector2(-53.7524, -0.618464)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(0.603959, -3.71078)
+scale = Vector2(0.767326, 0.757085)
+sprite_frames = SubResource("SpriteFrames_4ycoc")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(1.19209e-07, -15.4616)
+script = ExtResource("2_bv4dg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(2.41584, 0.309232)
+scale = Vector2(0.999996, 0.999996)
+shape = SubResource("RectangleShape2D_t6iak")
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+position = Vector2(1.19209e-07, -15.4616)
+stream = ExtResource("5_aw7an")
+volume_db = 5.0
+
+[node name="Area2D2" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(-0.60396, 8.04003)
+scale = Vector2(0.600586, 0.936563)
+script = ExtResource("6_upbuf")
+
+[node name="HazardPart" type="CollisionShape2D" parent="CharacterBody2D/Area2D2"]
+position = Vector2(5.02809, -4.95266)
+scale = Vector2(0.999998, 0.999999)
+shape = SubResource("RectangleShape2D_ab5dg")
+
+[connection signal="body_entered" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_exited"]
+[connection signal="body_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D/Area2D" method="_on_body_entered"]

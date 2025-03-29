@@ -1,0 +1,110 @@
+[gd_scene load_steps=13 format=3 uid="uid://coq7lo2drnf7m"]
+
+[ext_resource type="Script" path="res://Enemies/hopster/hopster.gd" id="1_qnns5"]
+[ext_resource type="Script" path="res://Enemies/hopster/area_2d2.gd" id="2_7me8j"]
+[ext_resource type="Texture2D" uid="uid://dw6ocsrvp3dib" path="res://Enemies/hopster/hopster_1.png" id="3_oe72o"]
+[ext_resource type="Texture2D" uid="uid://ekdn5t4o3sxi" path="res://Enemies/hopster/hopster_2.png" id="4_isdau"]
+[ext_resource type="AudioStream" uid="uid://duwmhp3jt3pod" path="res://music/SFX/Battle Star2.wav" id="4_mrpr5"]
+[ext_resource type="Texture2D" uid="uid://50bihnj42a5o" path="res://Enemies/hopster/hopster_3.png" id="5_k71id"]
+[ext_resource type="Script" path="res://hazardpart.gd" id="5_nvqt6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7qpq"]
+size = Vector2(22.3466, 37.1079)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qt5xh"]
+size = Vector2(24.1584, 32.0317)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ycoc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_oe72o")
+}],
+"loop": false,
+"name": &"death",
+"speed": 40.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_oe72o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_isdau")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_k71id")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_isdau")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6iak"]
+size = Vector2(22.9505, 25.9755)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ab5dg"]
+size = Vector2(61.3428, 17.7009)
+
+[node name="Node2D" type="Node2D"]
+scale = Vector2(1.52788, 1.42114)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+scale = Vector2(1.65574, 1.61691)
+script = ExtResource("1_qnns5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-1.5099, 3.09232)
+scale = Vector2(0.999998, 0.999998)
+shape = SubResource("RectangleShape2D_h7qpq")
+
+[node name="PlayerDetector" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(3.8147e-06, 0.618465)
+script = ExtResource("2_7me8j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PlayerDetector"]
+position = Vector2(-1.81188, -12.3051)
+shape = SubResource("RectangleShape2D_qt5xh")
+
+[node name="RayCastRight" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(-1.13687e-13, 3.55271e-15)
+target_position = Vector2(19.9307, -3.55271e-15)
+
+[node name="RayCastLeft" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(1.90735e-06, 0)
+target_position = Vector2(-27.1782, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(-0.60396, 1.23693)
+scale = Vector2(0.60396, 0.618464)
+sprite_frames = SubResource("SpriteFrames_4ycoc")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(1.19209e-07, -15.4616)
+script = ExtResource("2_7me8j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(-2.41584, 6.8031)
+scale = Vector2(0.999997, 0.999997)
+shape = SubResource("RectangleShape2D_t6iak")
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+position = Vector2(1.19209e-07, -15.4616)
+stream = ExtResource("4_mrpr5")
+volume_db = 5.0
+
+[node name="Area2D2" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(-0.60396, 8.04003)
+scale = Vector2(0.600586, 0.936563)
+script = ExtResource("5_nvqt6")
+
+[node name="HazardPart" type="CollisionShape2D" parent="CharacterBody2D/Area2D2"]
+position = Vector2(-2.51404, 5.28283)
+scale = Vector2(0.999998, 0.999998)
+shape = SubResource("RectangleShape2D_ab5dg")
+
+[connection signal="body_entered" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/PlayerDetector" to="CharacterBody2D" method="_on_player_detector_body_exited"]
+[connection signal="body_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D/Area2D" method="_on_body_entered"]

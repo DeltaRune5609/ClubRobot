@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bki2ji0tci0dw"]
+
+[ext_resource type="Script" path="res://items/dashmember.gd" id="1_2pc6p"]
+[ext_resource type="Texture2D" uid="uid://c33e6i8u6bmjm" path="res://Levels/dash.png" id="2_om5in"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0ljl"]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_2pc6p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x0ljl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_om5in")

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtlufgwagdb22"]
+
+[ext_resource type="Script" path="res://laser.gd" id="1_56hdy"]
+[ext_resource type="Texture2D" uid="uid://cjcsb7erjkfiq" path="res://coby4 (2).png" id="2_16nac"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jbu3n"]
+radius = 20.025
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_56hdy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_16nac")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jbu3n")

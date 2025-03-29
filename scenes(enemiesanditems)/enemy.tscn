@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfoyp7jea3b5b"]
+
+[ext_resource type="Script" path="res://scenes(enemiesanditems)/enemy.gd" id="1_5gdcd"]
+[ext_resource type="Texture2D" uid="uid://bm2pm4nayupcc" path="res://Enemies/mini_toni_(dont_use)/costume1 (4)5 (1).png" id="2_k4bqm"]
+[ext_resource type="Texture2D" uid="uid://dj7fy3v3nt38t" path="res://Enemies/mini_toni_(dont_use)/costume1 (4)5 (2).png" id="3_4kd53"]
+[ext_resource type="Texture2D" uid="uid://pb1gmfhxsbtv" path="res://Enemies/mini_toni_(dont_use)/costume1 (4)6.png" id="4_6xugr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_igddc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k4bqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4kd53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6xugr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6xugr")
+}],
+"loop": false,
+"name": &"squish",
+"speed": 40.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f83w7"]
+size = Vector2(40, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3h314"]
+size = Vector2(95, 165)
+
+[node name="Enemy" type="Node2D"]
+
+[node name="enemy" type="CharacterBody2D" parent="."]
+script = ExtResource("1_5gdcd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy"]
+sprite_frames = SubResource("SpriteFrames_igddc")
+animation = &"squish"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
+position = Vector2(-1, 6)
+shape = SubResource("RectangleShape2D_f83w7")
+
+[node name="Area2D" type="Area2D" parent="enemy"]
+position = Vector2(7, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy/Area2D"]
+position = Vector2(0.5, -90.5)
+shape = SubResource("RectangleShape2D_3h314")
+
+[connection signal="body_shape_entered" from="enemy/Area2D" to="enemy" method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="enemy/Area2D" to="enemy" method="_on_area_2d_body_shape_exited"]

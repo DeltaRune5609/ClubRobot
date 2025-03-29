@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://duvny03sqobvt"
+path="res://.godot/imported/Dumpster Diving (Funky Mix).mp3-21477ecfb4fb29dbdf15163a4e0b4781.mp3str"
+
+[deps]
+
+source_file="res://music/Dumpster Diving (Funky Mix).mp3"
+dest_files=["res://.godot/imported/Dumpster Diving (Funky Mix).mp3-21477ecfb4fb29dbdf15163a4e0b4781.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

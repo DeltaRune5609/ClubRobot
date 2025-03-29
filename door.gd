@@ -1,5 +1,6 @@
 extends Area2D
 
+<<<<<<< HEAD
 # The path to the scene to load when the player interacts with the door
 @export var next_scene_path: String = "res://Levels/cafeteria.tscn"
 
@@ -44,3 +45,14 @@ func start_transition() -> void:
 func _on_transition_finished() -> void:
 	# Load the next scene after the transition finishes
 	get_tree().change_scene_to_file(next_scene_path)
+=======
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+>>>>>>> 890cd3cde60dde59e0e0c8076f11dca884135f8a
