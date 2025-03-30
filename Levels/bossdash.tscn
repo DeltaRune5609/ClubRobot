@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c7i02lggl2li5"]
+[gd_scene load_steps=16 format=3 uid="uid://c7i02lggl2li5"]
 
 [ext_resource type="PackedScene" uid="uid://on3f3wa2oylt" path="res://player.tscn" id="1_2se06"]
 [ext_resource type="Texture2D" uid="uid://bj0gyqco4hu4p" path="res://map (6).png" id="2_dahp5"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://qr8fljf8bno6" path="res://door.png" id="5_iuiju"]
 [ext_resource type="PackedScene" uid="uid://kfju7bihi0w" path="res://Bosses/Dosh/dashboss.tscn" id="6_hntjj"]
 [ext_resource type="Script" path="res://Levels/tooffice.gd" id="6_pc723"]
+[ext_resource type="PackedScene" uid="uid://bki2ji0tci0dw" path="res://items/dashclub.tscn" id="8_awwex"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qu075"]
 texture = ExtResource("2_dahp5")
@@ -215,3 +216,6 @@ shape = SubResource("RectangleShape2D_jg0b7")
 
 [node name="Node2D" parent="." instance=ExtResource("6_hntjj")]
 position = Vector2(-1149, -43)
+
+[node name="Area2D3" parent="." instance=ExtResource("8_awwex")]
+position = Vector2(-2120, 13)

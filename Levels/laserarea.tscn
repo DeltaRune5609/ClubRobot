@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0wi31uwgru04"]
+[gd_scene load_steps=15 format=3 uid="uid://c0wi31uwgru04"]
 
 [ext_resource type="PackedScene" uid="uid://on3f3wa2oylt" path="res://player.tscn" id="1_hhe52"]
 [ext_resource type="AudioStream" uid="uid://dojyeqx0qjwem" path="res://music/Level 1.mp3" id="2_6tgfb"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://door.gd" id="7_7rcu7"]
 [ext_resource type="Texture2D" uid="uid://qr8fljf8bno6" path="res://door.png" id="7_rxrww"]
 [ext_resource type="PackedScene" uid="uid://esn4wvjl24cd" path="res://Enemies/moni_toni/moni_tony.tscn" id="8_n5pno"]
+[ext_resource type="PackedScene" uid="uid://cpcc5dsagowtg" path="res://items/laserclub.tscn" id="9_jbr3r"]
 [ext_resource type="PackedScene" uid="uid://dixfvkn68wwsg" path="res://Enemies/domeo/domeo.tscn" id="9_osttd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_65jvw"]
@@ -276,3 +277,6 @@ position = Vector2(-10260, -7242)
 
 [node name="Domeo8" parent="Enemies/Domeo" instance=ExtResource("9_osttd")]
 position = Vector2(-7833, -7243)
+
+[node name="Area2D2" parent="." instance=ExtResource("9_jbr3r")]
+position = Vector2(-2320, -229)

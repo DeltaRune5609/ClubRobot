@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://drldedsr41uc8" path="res://Enemies/reflecto/reflecto.tscn" id="9_lq31c"]
 [ext_resource type="PackedScene" uid="uid://esn4wvjl24cd" path="res://Enemies/moni_toni/moni_tony.tscn" id="10_l7mor"]
 [ext_resource type="PackedScene" uid="uid://coq7lo2drnf7m" path="res://Enemies/hopster/hopster.tscn" id="11_qr2qj"]
-[ext_resource type="PackedScene" uid="uid://c2akvuoun452r" path="res://items/drillclub.tscn" id="12_jyff5"]
+[ext_resource type="PackedScene" uid="uid://c2akvuoun452r" path="res://Levels/drillclub.tscn" id="12_jyff5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dhqgq"]
 texture = ExtResource("3_sjrb2")

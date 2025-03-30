@@ -21,10 +21,10 @@ var saved_pos = {
 	# Add others here by name
 }
 
-var has_glide_partner := true
-var has_laser_ability := true
+var has_glide_partner := false
+var has_laser_ability := false
 var has_dash_ability := false
-var has_ground_pound_ability := true
+var has_ground_pound_ability := false
 
 var powers = {
 	"laser": true,
